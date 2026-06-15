@@ -310,14 +310,13 @@ export default function Hero({ toggleNightMode }) {
       ))}
 
       <div className="hero-content" ref={contentRef}>
-        <div className="eyebrow">AI &amp; Data Science · Engineer in the making</div>
+        <div className="eyebrow">AI &amp; Data Science </div>
         <h1 className="title">
           Vaishnavi<br />
           <em>Bhandare</em>
         </h1>
         <p className="hero-sub">
-          B.E. student in Artificial Intelligence &amp; Data Science, building machine learning systems and clean interfaces — from skin disease detection models to groundwater dashboards. Currently exploring how data and design meet impact.
-        </p>
+          I'm Vaishnavi Kailas Bhandare, an Artificial Intelligence and Data Science student passionate about AI, Machine Learning, Data Analytics, and Software Development. With internship experience and hands-on project work, I enjoy building innovative solutions and continuously expanding my technical skills.</p>
         <div className="hero-cta">
           <a href="#projects" className="btn">View Projects</a>
           <a href="#contact" className="btn ghost">Get in Touch</a>
