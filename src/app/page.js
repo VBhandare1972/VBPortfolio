@@ -104,10 +104,10 @@ export default function Page() {
 
       {/* Navigation */}
       <Navbar isNightMode={isNightMode} toggleNightMode={() => setIsNightMode(!isNightMode)} />
-
+    
       {/* Main Content */}
       <main>
-        <Hero toggleNightMode={() => setIsNightMode(!isNightMode)} />
+        <Hero />
         <About />
         <Skills />
         <Experience />

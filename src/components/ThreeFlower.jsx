@@ -45,16 +45,14 @@ export default function ThreeFlower() {
     const flowerGroup = new THREE.Group();
     scene.add(flowerGroup);
 
-    // Glass Materials using MeshPhysicalMaterial
+    // Glass Materials using MeshPhysicalMaterial (optimized for performance)
     const petalMat = new THREE.MeshPhysicalMaterial({
       color: 0xe0935f, // soft gold/amber glass
-      roughness: 0.06,
+      roughness: 0.1,
       metalness: 0.1,
-      transmission: 0.9, // high transparency/transmission
-      opacity: 1,
+      opacity: 0.55,
       transparent: true,
       ior: 1.5, // glass Index of Refraction
-      thickness: 1.2, // refraction thickness
       clearcoat: 1.0, // high gloss surface
       clearcoatRoughness: 0.05,
       side: THREE.DoubleSide,
@@ -62,13 +60,11 @@ export default function ThreeFlower() {
 
     const centerMat = new THREE.MeshPhysicalMaterial({
       color: 0xc75c2e, // deeper rust-amber glass for the center
-      roughness: 0.08,
+      roughness: 0.12,
       metalness: 0.1,
-      transmission: 0.85,
-      opacity: 1,
+      opacity: 0.75,
       transparent: true,
       ior: 1.5,
-      thickness: 1.5,
       clearcoat: 1.0,
       clearcoatRoughness: 0.05,
     });
