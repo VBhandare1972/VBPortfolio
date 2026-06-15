@@ -31,13 +31,13 @@ export default function Skills() {
 
   return (
     <section id="skills">
-      <div className="section-head reveal">
+      <div className="section-head reveal reveal-up">
         <span className="section-num">02</span>
         <h2 className="section-title">Skills &amp; <em>toolkit</em></h2>
         <div className="section-line"></div>
       </div>
 
-      <div className="skills-grid reveal">
+      <div className="skills-grid reveal reveal-scale">
         {categories.map((category, index) => (
           <div key={index} className="skill-card">
             <span className="skill-icon">{category.icon}</span>

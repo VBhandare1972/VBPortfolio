@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -9,9 +9,20 @@ import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
+import GlowInsects from "@/components/GlowInsects";
 
 export default function Page() {
   const glowRef = useRef(null);
+  const [isNightMode, setIsNightMode] = useState(false);
+
+  // Manage body class for night mode
+  useEffect(() => {
+    if (isNightMode) {
+      document.body.classList.add("night-mode");
+    } else {
+      document.body.classList.remove("night-mode");
+    }
+  }, [isNightMode]);
 
   // Manage cinematic intro transition class on document body
   useEffect(() => {
@@ -75,6 +86,9 @@ export default function Page() {
 
   return (
     <>
+      {/* Glow Insects for Night Mode */}
+      <GlowInsects active={isNightMode} />
+
       {/* Cinematic Overlays */}
       <div className="grain"></div>
       <div className="vignette"></div>
@@ -89,11 +103,11 @@ export default function Page() {
       <div id="glow" ref={glowRef}></div>
 
       {/* Navigation */}
-      <Navbar />
+      <Navbar isNightMode={isNightMode} toggleNightMode={() => setIsNightMode(!isNightMode)} />
 
       {/* Main Content */}
       <main>
-        <Hero />
+        <Hero toggleNightMode={() => setIsNightMode(!isNightMode)} />
         <About />
         <Skills />
         <Experience />

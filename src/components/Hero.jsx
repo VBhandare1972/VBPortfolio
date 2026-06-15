@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Hero() {
+export default function Hero({ toggleNightMode }) {
   const farRef = useRef(null);
   const midRef = useRef(null);
   const nearRef = useRef(null);
@@ -150,7 +150,7 @@ export default function Hero() {
           />
         ))}
       </div>
-      <div className="moon" ref={moonRef} />
+      <div className="moon" ref={moonRef} onClick={toggleNightMode} />
 
       {/* Clouds */}
       <div className="cloud" style={{ top: "10%", width: "220px", height: "70px", animationDuration: "90s", animationDelay: "-10s" }}>
@@ -195,25 +195,25 @@ export default function Hero() {
       {/* Far skyline */}
       <div className="skyline-layer" id="layer-far" ref={farRef}>
         <svg viewBox="0 0 1600 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="180" width="120" height="220" fill="#d8c7ad" />
-          <rect x="140" y="120" width="90" height="280" fill="#d8c7ad" />
-          <rect x="250" y="200" width="160" height="200" fill="#d8c7ad" />
-          <rect x="430" y="90" width="70" height="310" fill="#d8c7ad" />
-          <rect x="520" y="160" width="130" height="240" fill="#d8c7ad" />
-          <rect x="670" y="60" width="100" height="340" fill="#d8c7ad" />
-          <rect x="790" y="170" width="150" height="230" fill="#d8c7ad" />
-          <rect x="960" y="110" width="80" height="290" fill="#d8c7ad" />
-          <rect x="1060" y="190" width="170" height="210" fill="#d8c7ad" />
-          <rect x="1250" y="80" width="90" height="320" fill="#d8c7ad" />
-          <rect x="1360" y="150" width="140" height="250" fill="#d8c7ad" />
-          <rect x="1520" y="100" width="80" height="300" fill="#d8c7ad" />
+          <rect x="0" y="180" width="120" height="220" fill="var(--skyline-1)" />
+          <rect x="140" y="120" width="90" height="280" fill="var(--skyline-1)" />
+          <rect x="250" y="200" width="160" height="200" fill="var(--skyline-1)" />
+          <rect x="430" y="90" width="70" height="310" fill="var(--skyline-1)" />
+          <rect x="520" y="160" width="130" height="240" fill="var(--skyline-1)" />
+          <rect x="670" y="60" width="100" height="340" fill="var(--skyline-1)" />
+          <rect x="790" y="170" width="150" height="230" fill="var(--skyline-1)" />
+          <rect x="960" y="110" width="80" height="290" fill="var(--skyline-1)" />
+          <rect x="1060" y="190" width="170" height="210" fill="var(--skyline-1)" />
+          <rect x="1250" y="80" width="90" height="320" fill="var(--skyline-1)" />
+          <rect x="1360" y="150" width="140" height="250" fill="var(--skyline-1)" />
+          <rect x="1520" y="100" width="80" height="300" fill="var(--skyline-1)" />
         </svg>
       </div>
 
       {/* Mid skyline */}
       <div className="skyline-layer" id="layer-mid" ref={midRef}>
         <svg viewBox="0 0 1600 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#bda788">
+          <g fill="var(--skyline-2)">
             <rect x="-20" y="220" width="140" height="180" />
             <rect x="130" y="140" width="110" height="260" />
             <rect x="260" y="240" width="90" height="160" />
@@ -227,7 +227,7 @@ export default function Hero() {
             <rect x="1380" y="210" width="160" height="190" />
             <rect x="1560" y="170" width="100" height="230" />
           </g>
-          <g fill="#c75c2e" opacity="0.55">
+          <g fill="#c75c2e" opacity="0.55" className="window-group mid-windows">
             <rect x="150" y="160" width="8" height="10" />
             <rect x="172" y="160" width="8" height="10" />
             <rect x="150" y="190" width="8" height="10" />
@@ -254,7 +254,7 @@ export default function Hero() {
       {/* Near skyline */}
       <div className="skyline-layer" id="layer-near" ref={nearRef}>
         <svg viewBox="0 0 1600 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#8a7459">
+          <g fill="var(--skyline-3)">
             <rect x="-30" y="260" width="200" height="160" />
             <rect x="180" y="180" width="130" height="240" />
             <rect x="320" y="280" width="160" height="140" />
@@ -266,7 +266,7 @@ export default function Hero() {
             <rect x="1270" y="280" width="200" height="140" />
             <rect x="1480" y="220" width="140" height="200" />
           </g>
-          <g fill="#c75c2e" opacity="0.75">
+          <g fill="#c75c2e" opacity="0.75" className="window-group near-windows">
             <rect x="210" y="220" width="10" height="14" />
             <rect x="240" y="220" width="10" height="14" />
             <rect x="210" y="260" width="10" height="14" />
@@ -307,12 +307,12 @@ export default function Hero() {
 
       <div className="hero-content" ref={contentRef}>
         <div className="eyebrow">AI &amp; Data Science · Engineer in the making</div>
-        <h1 class="title">
+        <h1 className="title">
           Vaishnavi<br />
           <em>Kailas Bhandare</em>
         </h1>
         <p className="hero-sub">
-          B.E. student in Artificial Intelligence &amp; Data Science, building machine learning systems and clean interfaces — from skin disease detection models to groundwater dashboards. Currently exploring how far data can take a good idea.
+          B.E. student in Artificial Intelligence &amp; Data Science, building machine learning systems and clean interfaces — from skin disease detection models to groundwater dashboards. Currently exploring how data and design meet impact.
         </p>
         <div className="hero-cta">
           <a href="#projects" className="btn">View Projects</a>

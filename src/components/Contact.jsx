@@ -3,7 +3,7 @@ import React from "react";
 export default function Contact() {
   return (
     <section id="contact">
-      <div className="reveal">
+      <div className="reveal reveal-up">
         <div className="subhead" style={{ textAlign: "center" }}>
           Get in touch
         </div>

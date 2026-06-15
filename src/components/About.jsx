@@ -4,17 +4,17 @@ import Image from "next/image";
 export default function About() {
   return (
     <section id="about">
-      <div className="section-head reveal">
+      <div className="section-head reveal reveal-up">
         <span className="section-num">01</span>
         <h2 className="section-title">About <em>me</em></h2>
         <div className="section-line"></div>
       </div>
 
       <div className="about-grid">
-        <div className="reveal">
+        <div className="reveal reveal-left">
           <div className="portrait-frame">
             <Image
-              src="/images/portrait.png"
+              src="/images/portrait.jpeg"
               alt="Vaishnavi K. Bhandare"
               width={400}
               height={500}
@@ -28,7 +28,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="about-text reveal">
+        <div className="about-text reveal reveal-right">
           <p>
             Currently pursuing a <strong>B.E. in Artificial Intelligence and Data Science</strong> at Pune Vidyarthi Griha&apos;s College of Engineering, Nashik — with a foundation built on a <strong>Diploma in AI &amp; Machine Learning</strong> from K.K. Wagh Polytechnic, where she graduated with 75.89%.
           </p>

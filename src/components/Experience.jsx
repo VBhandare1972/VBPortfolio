@@ -1,4 +1,5 @@
 import React from "react";
+import ThreeFlower from "./ThreeFlower";
 
 export default function Experience() {
   const experiences = [
@@ -33,26 +34,32 @@ export default function Experience() {
 
   return (
     <section id="experience">
-      <div className="section-head reveal">
+      <div className="section-head reveal reveal-up">
         <span className="section-num">03</span>
         <h2 className="section-title">Where I&apos;ve <em>worked</em></h2>
         <div className="section-line"></div>
       </div>
 
-      <div className="timeline reveal">
-        {experiences.map((exp, index) => (
-          <div key={index} className="tl-item">
-            <div className="tl-dot"></div>
-            <span className="tl-period">{exp.period}</span>
-            <div className="tl-role">{exp.role}</div>
-            <div className="tl-org">{exp.org}</div>
-            <ul>
-              {exp.bullets.map((bullet, bIndex) => (
-                <li key={bIndex}>{bullet}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div className="experience-grid">
+        <div className="timeline reveal reveal-up">
+          {experiences.map((exp, index) => (
+            <div key={index} className="tl-item">
+              <div className="tl-dot"></div>
+              <span className="tl-period">{exp.period}</span>
+              <div className="tl-role">{exp.role}</div>
+              <div className="tl-org">{exp.org}</div>
+              <ul>
+                {exp.bullets.map((bullet, bIndex) => (
+                  <li key={bIndex}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="flower-column reveal reveal-right">
+          <ThreeFlower />
+        </div>
       </div>
     </section>
   );

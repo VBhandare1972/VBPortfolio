@@ -26,14 +26,14 @@ export default function Education() {
 
   return (
     <section id="education">
-      <div className="section-head reveal">
+      <div className="section-head reveal reveal-up">
         <span className="section-num">05</span>
         <h2 className="section-title">Education &amp; <em>certificates</em></h2>
         <div className="section-line"></div>
       </div>
 
       <div className="edu-grid">
-        <div className="reveal">
+        <div className="reveal reveal-left">
           <div className="subhead">Academic Background</div>
           {academics.map((academic, index) => (
             <div
@@ -48,7 +48,7 @@ export default function Education() {
           ))}
         </div>
 
-        <div className="reveal">
+        <div className="reveal reveal-right">
           <div className="subhead">Certifications &amp; Participation</div>
           <ul className="cert-list">
             {certifications.map((cert, index) => (
