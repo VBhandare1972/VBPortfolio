@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function ThreeFlower() {
+export default function ThreeFlower({ isNightMode }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +33,8 @@ export default function ThreeFlower() {
     dirLight1.position.set(5, 5, 5);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0xe0935f, 1.2); // Warm secondary light for color bounce
+    const bounceLightColor = isNightMode ? 0x818cf8 : 0xe0935f; // Cool indigo vs warm amber
+    const dirLight2 = new THREE.DirectionalLight(bounceLightColor, 1.2);
     dirLight2.position.set(-5, -3, 3);
     scene.add(dirLight2);
 
@@ -45,12 +46,15 @@ export default function ThreeFlower() {
     const flowerGroup = new THREE.Group();
     scene.add(flowerGroup);
 
+    const petalColor = isNightMode ? 0xffffff : 0xe0935f;
+    const centerColor = isNightMode ? 0xe5e7eb : 0xc75c2e;
+
     // Glass Materials using MeshPhysicalMaterial (optimized for performance)
     const petalMat = new THREE.MeshPhysicalMaterial({
-      color: 0xe0935f, // soft gold/amber glass
-      roughness: 0.1,
-      metalness: 0.1,
-      opacity: 0.55,
+      color: petalColor,
+      roughness: isNightMode ? 0.15 : 0.1, // slightly rougher white glass looks beautiful
+      metalness: isNightMode ? 0.25 : 0.1, // a bit more metallic shine in dark mode
+      opacity: isNightMode ? 0.65 : 0.55, // slightly more opaque in dark mode to stand out
       transparent: true,
       ior: 1.5, // glass Index of Refraction
       clearcoat: 1.0, // high gloss surface
@@ -59,10 +63,10 @@ export default function ThreeFlower() {
     });
 
     const centerMat = new THREE.MeshPhysicalMaterial({
-      color: 0xc75c2e, // deeper rust-amber glass for the center
-      roughness: 0.12,
-      metalness: 0.1,
-      opacity: 0.75,
+      color: centerColor,
+      roughness: isNightMode ? 0.18 : 0.12,
+      metalness: isNightMode ? 0.2 : 0.1,
+      opacity: isNightMode ? 0.8 : 0.7,
       transparent: true,
       ior: 1.5,
       clearcoat: 1.0,
@@ -70,14 +74,14 @@ export default function ThreeFlower() {
     });
 
     // Center bulb
-    const centerGeo = new THREE.SphereGeometry(0.35, 32, 32);
+    const centerGeo = new THREE.SphereGeometry(0.35, 16, 16);
     const centerMesh = new THREE.Mesh(centerGeo, centerMat);
     centerMesh.scale.set(1.1, 1.1, 0.75); // flatten slightly
     centerMesh.position.z = 0.1; // place in front of petals
     flowerGroup.add(centerMesh);
 
     // Petal geometry (Organic leaf/petal shape using scaled sphere)
-    const petalGeo = new THREE.SphereGeometry(0.32, 32, 16);
+    const petalGeo = new THREE.SphereGeometry(0.32, 16, 8);
     petalGeo.scale(1.8, 0.42, 0.05); // stretch X (length), compress Y (width) & Z (thickness)
     petalGeo.translate(0.9, 0, 0);   // shift geometry so pivot is at the base edge (x=0)
 
@@ -123,31 +127,45 @@ export default function ThreeFlower() {
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
-    // 7. Animation Loop
+    // 7. Viewport checking system to only render when on screen
+    let inViewport = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          inViewport = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.02 }
+    );
+    observer.observe(container);
+
+    // 8. Animation Loop
     const clock = new THREE.Clock();
 
     const animate = () => {
       const requestID = requestAnimationFrame(animate);
 
-      const time = clock.getElapsedTime();
+      if (inViewport) {
+        const time = clock.getElapsedTime();
 
-      // Continuous slow spinning on the Z axis (facing the camera)
-      flowerGroup.rotation.z = time * 0.12;
+        // Continuous slow spinning on the Z axis (facing the camera)
+        flowerGroup.rotation.z = time * 0.12;
 
-      // Mouse tracking: tilt on X and Y axes
-      targetRotationX = mouseY * 0.55;
-      targetRotationY = mouseX * 0.55;
+        // Mouse tracking: tilt on X and Y axes
+        targetRotationX = mouseY * 0.55;
+        targetRotationY = mouseX * 0.55;
 
-      // Smooth interpolation (lerp)
-      flowerGroup.rotation.x += (targetRotationX - flowerGroup.rotation.x) * 0.08;
-      flowerGroup.rotation.y += (targetRotationY - flowerGroup.rotation.y) * 0.08;
+        // Smooth interpolation (lerp)
+        flowerGroup.rotation.x += (targetRotationX - flowerGroup.rotation.x) * 0.08;
+        flowerGroup.rotation.y += (targetRotationY - flowerGroup.rotation.y) * 0.08;
 
-      renderer.render(scene, camera);
+        renderer.render(scene, camera);
+      }
     };
 
     animate();
 
-    // 8. Resize Handler
+    // 9. Resize Handler
     const handleResize = () => {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth;
@@ -161,6 +179,7 @@ export default function ThreeFlower() {
 
     // Clean up
     return () => {
+      observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
       if (container && renderer.domElement && container.contains(renderer.domElement)) {
@@ -168,7 +187,7 @@ export default function ThreeFlower() {
       }
       renderer.dispose();
     };
-  }, []);
+  }, [isNightMode]);
 
   return (
     <div

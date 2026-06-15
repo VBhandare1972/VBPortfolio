@@ -22,6 +22,10 @@ export default function Education() {
   const certifications = [
     "Smart India Hackathon — Participation",
     "24-Hour Hackathon — Participation",
+    "Infosys Virtual Internship 6.0",
+    "GDG Hackathon",
+    "Talent Battle Code Training",
+    "Zensar Basic Developer Training",
   ];
 
   return (

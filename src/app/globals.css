@@ -16,6 +16,7 @@
   --hero-sky-1: #fbf3e6;
   --hero-sky-2: #f5e9d6;
   --hero-sky-3: #ecdcc4;
+  --contact-bottom: #ecdcc4;
 }
 
 * {
@@ -367,11 +368,11 @@ nav.scrolled {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff7e8, var(--amber-soft) 60%, var(--amber) 100%);
-  box-shadow: 0 0 60px 14px rgba(199, 92, 46, 0.30);
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffea79 35%, #ff9800 80%, #e65100 100%);
+  box-shadow: 0 0 80px 24px rgba(255, 152, 0, 0.45), 0 0 120px 40px rgba(255, 235, 59, 0.25);
   pointer-events: auto;
   cursor: pointer;
-  z-index: 10;
+  z-index: 200;
   will-change: transform;
   transition: background 0.5s ease, box-shadow 0.5s ease;
 }
@@ -1174,7 +1175,7 @@ section {
 
 /* ================= CONTACT / FOOTER ================= */
 #contact {
-  background: linear-gradient(180deg, var(--night) 0%, #ecdcc4 100%);
+  background: linear-gradient(180deg, var(--night) 0%, var(--contact-bottom) 100%);
   text-align: center;
   padding-bottom: 90px;
 }
@@ -1359,6 +1360,7 @@ body.night-mode {
   --hero-sky-1: #030712;
   --hero-sky-2: #080b11;
   --hero-sky-3: #0f172a;
+  --contact-bottom: #090d16;
 }
 
 body.night-mode .moon {

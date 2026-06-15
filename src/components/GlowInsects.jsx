@@ -13,8 +13,8 @@ export default function GlowInsects({ active }) {
       return;
     }
 
-    // Initialize 8 insects with random starting positions, speeds, and sizes
-    const temp = Array.from({ length: 8 }).map((_, i) => ({
+    // Initialize exactly 6 insects for optimal performance and ambiance
+    const temp = Array.from({ length: 6 }).map((_, i) => ({
       id: i,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -58,7 +58,7 @@ export default function GlowInsects({ active }) {
         if (ins.y > window.innerHeight + margin) ins.y = -margin;
       });
 
-      // Update positions directly on DOM elements for 60fps GPU performance
+      // Update positions directly on DOM elements for 60fps GPU performance (no querySelectorAll)
       const elements = insectRefs.current;
       if (elements && elements.length === list.length) {
         elements.forEach((el, index) => {

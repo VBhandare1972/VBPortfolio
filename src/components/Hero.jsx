@@ -31,7 +31,7 @@ export default function Hero({ toggleNightMode }) {
 
       // Generate particles (floating fireflies/lights)
       const tempParticles = [];
-      for (let i = 0; i < 22; i++) {
+      for (let i = 0; i < 12; i++) {
         tempParticles.push({
           id: i,
           left: Math.random() * 100,
@@ -107,6 +107,10 @@ export default function Hero({ toggleNightMode }) {
     const handleScroll = () => {
       const s = window.scrollY;
       const vh = window.innerHeight;
+      
+      // If we have already scrolled past the Hero and zoom is capped at 1, do nothing.
+      if (s > vh && scrollZoom === 1) return;
+      
       scrollZoom = Math.min(s / vh, 1);
       if (!reqId) {
         reqId = requestAnimationFrame(() => {
@@ -150,7 +154,7 @@ export default function Hero({ toggleNightMode }) {
           />
         ))}
       </div>
-      <div className="moon" ref={moonRef} onClick={toggleNightMode} />
+      <div className="moon" ref={moonRef} onClick={() => toggleNightMode && toggleNightMode()} />
 
       {/* Clouds */}
       <div className="cloud" style={{ top: "10%", width: "220px", height: "70px", animationDuration: "90s", animationDelay: "-10s" }}>
@@ -309,7 +313,7 @@ export default function Hero({ toggleNightMode }) {
         <div className="eyebrow">AI &amp; Data Science · Engineer in the making</div>
         <h1 className="title">
           Vaishnavi<br />
-          <em>Kailas Bhandare</em>
+          <em>Bhandare</em>
         </h1>
         <p className="hero-sub">
           B.E. student in Artificial Intelligence &amp; Data Science, building machine learning systems and clean interfaces — from skin disease detection models to groundwater dashboards. Currently exploring how data and design meet impact.
@@ -320,11 +324,7 @@ export default function Hero({ toggleNightMode }) {
         </div>
       </div>
 
-      <div className="scroll-cue" ref={cueRef}>
-        <span>Scroll</span>
-        <span className="line" />
-        <span>Nashik, India</span>
-      </div>
+
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import ThreeFlower from "./ThreeFlower";
 
-export default function Experience() {
+export default function Experience({ isNightMode }) {
   const experiences = [
     {
       period: "Feb 2026 — Apr 2026",
@@ -58,7 +58,7 @@ export default function Experience() {
         </div>
 
         <div className="flower-column reveal reveal-right">
-          <ThreeFlower />
+          <ThreeFlower isNightMode={isNightMode} />
         </div>
       </div>
     </section>

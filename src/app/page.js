@@ -93,12 +93,7 @@ export default function Page() {
       <div className="grain"></div>
       <div className="vignette"></div>
 
-      {/* Intro title text flicker */}
-      <div className="intro-title">
-        <span>A PORTFOLIO IN ONE TAKE</span>
-        <h2>Nashik, present day.</h2>
-      </div>
-
+   
       {/* Cursor glow */}
       <div id="glow" ref={glowRef}></div>
 
@@ -107,10 +102,10 @@ export default function Page() {
     
       {/* Main Content */}
       <main>
-        <Hero />
+        <Hero toggleNightMode={() => setIsNightMode(!isNightMode)} />
         <About />
         <Skills />
-        <Experience />
+        <Experience isNightMode={isNightMode} />
         <Projects />
         <Education />
         <Contact />

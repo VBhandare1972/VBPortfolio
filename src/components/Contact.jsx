@@ -25,7 +25,7 @@ export default function Contact() {
           </a>
         </div>
         <footer>
-          © 2026 Vaishnavi Kailas Bhandare — Hirawadi, Panchavati, Nashik
+          © 2026 Vaishnavi Kailas Bhandar
         </footer>
       </div>
     </section>
